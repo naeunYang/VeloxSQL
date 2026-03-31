@@ -1,4 +1,4 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings # .env 파일 자동으로 읽어줌
 
 
 class Settings(BaseSettings):

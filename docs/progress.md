@@ -21,10 +21,10 @@
 
 ## 다음 할 일
 
-### 3단계 — 백엔드 파이프라인
+### 3단계 — 백엔드 파이프라인 (진행 중)
 
-#### 3-1 쿼리 파서
-- `backend/app/services/query_parser.py` — sqlglot으로 테이블명 추출
+#### 3-1 쿼리 파서 ✅
+- `backend/app/services/query_parser.py` — sqlglot으로 테이블명 추출, 쿼리 타입 식별
 
 #### 3-2 실행계획 파서
 - `backend/app/services/plan_analyzer.py` — MSSQL 실행계획 XML/텍스트 파싱
@@ -39,7 +39,7 @@
 
 #### 3-4 AI 서비스
 - `backend/app/prompts/analysis_prompt.py`
-- `backend/app/services/ai_service.py` — Claude API 호출
+- `backend/app/services/ai_service.py` — Groq API 호출
 
 #### 3-5 오케스트레이터
 - `backend/app/services/analysis_service.py` — 파이프라인 오케스트레이터

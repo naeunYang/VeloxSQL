@@ -5,7 +5,7 @@
 SQL 자동 튜닝 AI 웹 서비스. 개발자가 SQL + 실행계획 + 선택적 스키마를 입력하면 느린 원인을 분석하고 튜닝된 쿼리를 제안한다.
 
 - MVP 대상 DB: MSSQL
-- 기술 스택: Next.js (TypeScript) + FastAPI (Python) + Claude API
+- 기술 스택: Next.js (TypeScript) + FastAPI (Python) + Groq API
 
 ---
 
@@ -64,7 +64,7 @@ VeloxSQL/
     │   │   ├── query_parser.py          # sqlglot으로 SQL 파싱 + 테이블 감지
     │   │   ├── plan_analyzer.py         # MSSQL 실행계획 XML/텍스트 파싱
     │   │   ├── rule_engine.py           # 룰 등록 + 실행
-    │   │   └── ai_service.py            # Claude API 호출
+    │   │   └── ai_service.py            # Groq API 호출
     │   ├── rules/
     │   │   ├── base_rule.py             # AbstractBaseRule
     │   │   ├── full_scan_rule.py
@@ -75,7 +75,7 @@ VeloxSQL/
     │   │   ├── request_models.py
     │   │   └── response_models.py
     │   └── prompts/
-    │       └── analysis_prompt.py       # Claude 프롬프트 빌더
+    │       └── analysis_prompt.py       # Groq 프롬프트 빌더
     ├── tests/
     │   ├── test_analyze_router.py
     │   ├── test_rule_engine.py
@@ -133,7 +133,7 @@ VeloxSQL/
 **에러 응답**
 - `422` — Pydantic 유효성 실패
 - `400` — 실행계획 파싱 불가
-- `502` — Claude API 연결 실패
+- `502` — Groq API 연결 실패
 - `500` — 서버 오류
 
 ### GET /api/v1/health → `{"status": "ok"}`
@@ -149,7 +149,7 @@ VeloxSQL/
   → query_parser.parse_query()       # 테이블명 추출, 쿼리 타입 식별
   → plan_analyzer.parse_plan()       # XML 우선 파싱, 실패 시 텍스트 파싱
   → rule_engine.detect()             # 등록된 룰 순회 → Bottleneck 목록
-  → ai_service.analyze()             # 룰 결과 포함한 프롬프트 → Claude API
+  → ai_service.analyze()             # 룰 결과 포함한 프롬프트 → Groq API
   → 결과 병합 → AnalyzeResponse 반환
 ```
 
@@ -235,7 +235,7 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
 fastapi
 uvicorn[standard]
 pydantic-settings
-anthropic
+groq
 sqlglot
 lxml
 pytest
