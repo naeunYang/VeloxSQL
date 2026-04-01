@@ -145,12 +145,27 @@ VeloxSQL/
 `analysis_service.run_analysis()` 순서:
 
 ```
-쿼리 입력
-  → query_parser.parse_query()       # 테이블명 추출, 쿼리 타입 식별
-  → plan_analyzer.parse_plan()       # XML 우선 파싱, 실패 시 텍스트 파싱
-  → rule_engine.detect()             # 등록된 룰 순회 → Bottleneck 목록
-  → ai_service.analyze()             # 룰 결과 포함한 프롬프트 → Groq API
-  → 결과 병합 → AnalyzeResponse 반환
+입력 (SQL + 실행계획 XML + 스키마?)
+        ↓
+  query_parser.parse_query()
+    → tables (감지된 테이블명 목록), query_type (SELECT/INSERT 등)
+        ↓
+  plan_analyzer.analyze_plan()
+    → operations (RelOp 노드 목록), missing_indexes, warnings, total_cost
+    → has_table_scan, has_index_scan (룰 엔진용 플래그)
+    ※ XML 파싱 실패 시 is_xml=False로 빈 구조 반환, 파이프라인은 계속 진행
+        ↓
+  rule_engine.run_rules(plan)
+    → bottlenecks (rule 출처 Bottleneck 목록)
+    → index_suggestions (CREATE INDEX DDL 포함)
+    ※ is_xml=False이면 룰 스킵, 빈 목록 반환
+        ↓
+  ai_service.analyze()
+    → query_explanation, plan_interpretation, tuned_sql
+    → AI가 잡은 추가 bottleneck (ai 출처)
+    ※ 룰 결과를 프롬프트에 포함 → AI 중복 탐지 금지 지시
+        ↓
+  결과 병합 → AnalyzeResponse 반환
 ```
 
 ### 룰 목록

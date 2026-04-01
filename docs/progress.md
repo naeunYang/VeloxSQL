@@ -26,20 +26,20 @@
 #### 3-1 쿼리 파서 ✅
 - `backend/app/services/query_parser.py` — sqlglot으로 테이블명 추출, 쿼리 타입 식별
 
-#### 3-2 실행계획 파서
+#### 3-2 실행계획 파서 ✅
 - `backend/app/services/plan_analyzer.py` — MSSQL 실행계획 XML/텍스트 파싱
 
-#### 3-3 룰 엔진
+#### 3-3 룰 엔진 ✅
 - `backend/app/rules/base_rule.py` — AbstractBaseRule
-- `backend/app/rules/full_scan_rule.py`
-- `backend/app/rules/type_mismatch_rule.py`
-- `backend/app/rules/missing_index_rule.py`
-- `backend/app/rules/nested_loop_rule.py`
-- `backend/app/services/rule_engine.py`
+- `backend/app/rules/full_scan_rule.py` — Table Scan / Index Scan 감지
+- `backend/app/rules/type_mismatch_rule.py` — CONVERT_IMPLICIT 감지
+- `backend/app/rules/missing_index_rule.py` — 누락 인덱스 탐지 + DDL 생성
+- `backend/app/rules/nested_loop_rule.py` — 대용량 Nested Loops 감지
+- `backend/app/services/rule_engine.py` — 룰 오케스트레이터
 
-#### 3-4 AI 서비스
-- `backend/app/prompts/analysis_prompt.py`
-- `backend/app/services/ai_service.py` — Groq API 호출
+#### 3-4 AI 서비스 ✅
+- `backend/app/prompts/analysis_prompt.py` — 프롬프트 빌더 (룰 결과 포함)
+- `backend/app/services/ai_service.py` — Groq API 호출 + 응답 파싱
 
 #### 3-5 오케스트레이터
 - `backend/app/services/analysis_service.py` — 파이프라인 오케스트레이터

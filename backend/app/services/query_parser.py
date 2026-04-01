@@ -24,7 +24,7 @@ def parse_query(sql: str) -> dict:
 def _extract_tables(sql: str) -> list[str]:
     """sqlglot으로 SQL에서 테이블명 추출."""
     try:
-        statements = sqlglot.parse(sql, dialect="tsql")
+        statements = sqlglot.parse(sql, dialect="tsql") # tsql = MSSQL
         tables: list[str] = []
 
         for statement in statements:
