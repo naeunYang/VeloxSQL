@@ -100,7 +100,7 @@ def _parse_xml_plan(xml_text: str) -> PlanAnalysis:
         missing_indexes=missing_indexes,
         warnings=warnings,
         total_cost=total_cost,
-        has_table_scan=any(op["operation"] == "Table Scan" for op in operations),
+        has_table_scan=any(op["operation"] == "Table Scan" for op in operations), # any : 하나라도 True면 True 반환
         has_index_scan=any(op["operation"] == "Index Scan" for op in operations),
     )
 

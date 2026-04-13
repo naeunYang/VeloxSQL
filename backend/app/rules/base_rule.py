@@ -11,7 +11,7 @@ class BaseRule(ABC):
     각 룰이 반환한 Bottleneck 목록을 합쳐서 최종 결과에 포함시킨다.
     """
 
-    @abstractmethod
+    @abstractmethod # 반드시 구현
     def check(self, plan: PlanAnalysis) -> list[Bottleneck]:
         """
         실행계획 분석 결과를 받아 탐지된 문제 목록을 반환한다.

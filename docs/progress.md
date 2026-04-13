@@ -41,10 +41,10 @@
 - `backend/app/prompts/analysis_prompt.py` — 프롬프트 빌더 (룰 결과 포함)
 - `backend/app/services/ai_service.py` — Groq API 호출 + 응답 파싱
 
-#### 3-5 오케스트레이터
+#### 3-5 오케스트레이터 ✅
 - `backend/app/services/analysis_service.py` — 파이프라인 오케스트레이터
 
-### 4단계 — 백엔드 라우터
+### 4단계 — 백엔드 라우터 ✅
 - `backend/app/routers/analyze.py` — `POST /api/v1/analyze`
 
 ### 5단계 — 프론트엔드 타입 + 훅 + lib

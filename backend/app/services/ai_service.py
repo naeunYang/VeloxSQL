@@ -71,7 +71,7 @@ def _parse_response(raw: str, original_sql: str) -> dict:
     """
     json_str = _extract_json(raw)
     try:
-        data = json.loads(json_str)
+        data = json.loads(json_str) # 문자열(JSON)을 파이썬 객체로 변환
     except json.JSONDecodeError:
         return _fallback_result(original_sql)
 
