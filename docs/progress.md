@@ -47,12 +47,13 @@
 ### 4단계 — 백엔드 라우터 ✅
 - `backend/app/routers/analyze.py` — `POST /api/v1/analyze`
 
-### 5단계 — 프론트엔드 타입 + 훅 + lib
-- `frontend/src/types/analysis.ts`
-- `frontend/src/hooks/useAnalysis.ts`
-- `frontend/src/hooks/useDetectedTables.ts`
-- `frontend/src/lib/api.ts`
-- `frontend/src/lib/diff.ts`
+### 5단계 — 프론트엔드 타입 + 훅 + lib ✅
+- `frontend/src/types/analysis.ts` — 백엔드 Pydantic 모델 대응 TypeScript 타입
+- `frontend/src/hooks/useAnalysis.ts` — 분석 요청 상태 관리 훅
+- `frontend/src/hooks/useDetectedTables.ts` — 감지된 테이블 목록 관리 훅
+- `frontend/src/lib/api.ts` — analyzeQuery() fetch 함수
+- `frontend/src/lib/diff.ts` — computeSqlDiff() 줄 단위 diff 유틸
+- `docs/dev-setup.md` — 백엔드/프론트엔드 실행 가이드 문서
 
 ### 6단계 — 프론트엔드 컴포넌트
 
