@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { InputPanel } from "@/components/input/InputPanel";
+import { InputPanel, SAMPLE_SQL, SAMPLE_PLAN, SAMPLE_SCHEMA } from "@/components/input/InputPanel";
 import { ResultPanel } from "@/components/results/ResultPanel";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { ErrorBanner } from "@/components/common/ErrorBanner";
@@ -15,6 +15,15 @@ export default function AnalyzePage() {
   const { status, result, error, isLoading, analyze, reset } = useAnalysis();
   const { detectedTables, updateTables } = useDetectedTables();
   const [lastSql, setLastSql] = useState("");
+  const [sql, setSql] = useState("");
+  const [executionPlan, setExecutionPlan] = useState("");
+  const [schema, setSchema] = useState("");
+
+  function loadSample() {
+    setSql(SAMPLE_SQL);
+    setExecutionPlan(SAMPLE_PLAN);
+    setSchema(SAMPLE_SCHEMA);
+  }
 
   async function handleSubmit(request: AnalyzeRequest) {
     setLastSql(request.sql);
@@ -42,11 +51,26 @@ export default function AnalyzePage() {
 
       <main className="mx-auto flex min-h-0 w-full max-w-7xl flex-1 gap-8 px-6 py-8">
         <section className="flex min-h-0 flex-1 flex-col">
-          <h2 className="mb-4 shrink-0 text-lg font-semibold">입력</h2>
+          <div className="mb-4 flex shrink-0 items-center justify-between">
+            <h2 className="text-lg font-semibold">입력</h2>
+            <button
+              onClick={loadSample}
+              disabled={isLoading}
+              className="text-xs text-muted-foreground underline-offset-2 hover:text-blue-600 hover:underline disabled:opacity-40"
+            >
+              샘플 데이터 불러오기
+            </button>
+          </div>
           <InputPanel
             onSubmit={handleSubmit}
             isLoading={isLoading}
             detectedTables={detectedTables}
+            sql={sql}
+            onSqlChange={setSql}
+            executionPlan={executionPlan}
+            onExecutionPlanChange={setExecutionPlan}
+            schema={schema}
+            onSchemaChange={setSchema}
           />
         </section>
 

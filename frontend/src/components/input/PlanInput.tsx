@@ -11,7 +11,7 @@ interface PlanInputProps {
 
 export function PlanInput({ value, onChange, disabled = false }: PlanInputProps) {
   return (
-    <div className="flex min-h-0 flex-[2] flex-col gap-1.5">
+    <div className="flex flex-col gap-1.5">
       <Label htmlFor="plan-input" className="shrink-0">
         실행 계획 <span className="text-muted-foreground text-xs font-normal">(선택)</span>
       </Label>
@@ -24,7 +24,7 @@ export function PlanInput({ value, onChange, disabled = false }: PlanInputProps)
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}
         placeholder={'<?xml version="1.0"?><ShowPlanXML ...>'}
-        className="min-h-0 flex-1 resize-none font-mono text-sm"
+        className="h-36 resize-y font-mono text-sm"
       />
     </div>
   );

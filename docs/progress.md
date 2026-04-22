@@ -94,6 +94,10 @@ shadcn/ui 기반으로 전체 구현. Button / Textarea / Label / Badge / Card /
 - SchemaInput 접기 제거, 항상 펼침 상태
 - analyze 페이지 전체 너비 max-w-7xl 확장
 - h-screen 레이아웃으로 페이지 스크롤 제거, textarea flex 비율 분배
+- 각 textarea 크기 조절 가능 (resize-y, 고정 초기 높이)
+- 분석하기 버튼: 가운데 정렬, blue-600 브랜드 색상, size="lg"
+- 샘플 데이터 불러오기 버튼: "입력" h2 오른쪽에 배치 (레이아웃 영향 없음)
+  - MSSQL CONVERT_IMPLICIT + Table Scan + 누락 인덱스 포함 샘플 데이터
 
 ---
 

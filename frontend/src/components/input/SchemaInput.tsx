@@ -20,7 +20,7 @@ export function SchemaInput({
   disabled = false,
 }: SchemaInputProps) {
   return (
-    <div className="flex min-h-0 flex-[1] flex-col gap-1.5">
+    <div className="flex flex-col gap-1.5">
       <Label htmlFor="schema-input" className="shrink-0">
         스키마 정보 <span className="text-muted-foreground text-xs font-normal">(선택)</span>
       </Label>
@@ -48,7 +48,7 @@ export function SchemaInput({
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}
         placeholder={"CREATE TABLE Orders (\n  OrderID INT PRIMARY KEY,\n  CustomerID INT,\n  ...\n);"}
-        className="min-h-0 flex-1 resize-none font-mono text-sm"
+        className="h-32 resize-y font-mono text-sm"
       />
     </div>
   );
