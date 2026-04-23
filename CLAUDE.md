@@ -17,7 +17,7 @@ npm run lint
 npm run type-check
 
 # 백엔드
-uvicorn main:app --reload          # localhost:8000
+uvicorn app.main:app --reload      # localhost:8000  (backend/ 디렉토리에서 실행)
 pytest tests/test_foo.py::test_bar # 단일 테스트
 ```
 

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)",
+      "Bash(python -c \"import fastapi, uvicorn, groq, sqlglot\")",
+      "Bash(py --version)",
+      "Bash(pip list:*)",
+      "Bash(npm run *)",
+      "Bash(npx shadcn@latest init -d)",
+      "Bash(npx shadcn@latest add button textarea badge card tabs separator alert scroll-area -y)",
+      "Bash(npx shadcn@latest add label -y)"
+    ]
+  }
+}

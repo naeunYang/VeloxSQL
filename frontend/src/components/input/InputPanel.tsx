@@ -88,6 +88,8 @@ export { SAMPLE_SQL, SAMPLE_PLAN, SAMPLE_SCHEMA };
 
 interface InputPanelProps {
   onSubmit: (request: AnalyzeRequest) => void;
+  onReset?: () => void;
+  showReset?: boolean;
   isLoading: boolean;
   detectedTables: string[];
   sql: string;
@@ -100,6 +102,8 @@ interface InputPanelProps {
 
 export function InputPanel({
   onSubmit,
+  onReset,
+  showReset = false,
   isLoading,
   detectedTables,
   sql,
@@ -126,18 +130,27 @@ export function InputPanel({
   return (
     <Card className="flex min-h-0 flex-1 flex-col">
       <CardContent className="flex min-h-0 flex-1 flex-col pt-6">
-        <form onSubmit={handleSubmit} className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto pr-1">
-          <QueryInput value={sql} onChange={onSqlChange} disabled={isLoading} />
-          <Separator className="shrink-0" />
-          <PlanInput value={executionPlan} onChange={onExecutionPlanChange} disabled={isLoading} />
-          <Separator className="shrink-0" />
-          <SchemaInput
-            value={schema}
-            onChange={onSchemaChange}
-            detectedTables={detectedTables}
-            disabled={isLoading}
-          />
-          <div className="flex shrink-0 justify-center pt-1">
+        <form onSubmit={handleSubmit} className="flex min-h-0 flex-1 flex-col">
+          {/* 스크롤 영역 — 입력 필드만 */}
+          <div className="min-h-0 flex-1 overflow-y-auto flex flex-col gap-4 pr-1 pb-2">
+            <QueryInput value={sql} onChange={onSqlChange} disabled={isLoading} />
+            <Separator className="shrink-0" />
+            <PlanInput value={executionPlan} onChange={onExecutionPlanChange} disabled={isLoading} />
+            <Separator className="shrink-0" />
+            <SchemaInput
+              value={schema}
+              onChange={onSchemaChange}
+              detectedTables={detectedTables}
+              disabled={isLoading}
+            />
+          </div>
+          {/* 버튼 영역 — 항상 보임 */}
+          <div className="shrink-0 flex items-center justify-center gap-3 border-t pt-4">
+            {onReset && (
+              <Button type="button" variant="outline" size="lg" onClick={onReset} disabled={!showReset}>
+                초기화
+              </Button>
+            )}
             <Button
               type="submit"
               size="lg"

@@ -88,7 +88,7 @@ shadcn/ui 기반으로 전체 구현. Button / Textarea / Label / Badge / Card /
 - `frontend/src/lib/utils.ts` — shadcn cn() 유틸 (자동 생성)
 - `frontend/src/components/ui/` — shadcn UI 컴포넌트 (자동 생성)
 
-#### UI 개선 (세션)
+#### UI 개선 (이전 세션)
 - 랜딩 페이지: 흰 배경, 피처 카드 3열, lucide-react 아이콘
 - 실행 계획 / 스키마 → 선택 항목으로 변경 (canSubmit 조건 완화)
 - SchemaInput 접기 제거, 항상 펼침 상태
@@ -98,6 +98,18 @@ shadcn/ui 기반으로 전체 구현. Button / Textarea / Label / Badge / Card /
 - 분석하기 버튼: 가운데 정렬, blue-600 브랜드 색상, size="lg"
 - 샘플 데이터 불러오기 버튼: "입력" h2 오른쪽에 배치 (레이아웃 영향 없음)
   - MSSQL CONVERT_IMPLICIT + Table Scan + 누락 인덱스 포함 샘플 데이터
+
+#### UI 개선 (현재 세션)
+- `CLAUDE.md`: 백엔드 실행 명령어 수정 (`uvicorn app.main:app --reload`)
+- `frontend/src/components/ui/tabs.tsx`: shadcn Tailwind v4 문법 → v3 호환 문법으로 수정
+  - `data-horizontal:` → `data-[orientation=horizontal]:` 등 전면 교체
+  - TabsContent `flex-1` → `w-full` 로 변경
+- `analyze/page.tsx`: UI 레이아웃 전면 리팩토링
+  - 상단: SQL 에디터 전체 폭 (min-h-[300px], resize 가능, Ctrl+Enter 분석)
+  - 하단 2분할: 왼쪽(실행계획+스키마 접기/펼치기), 오른쪽(분석 결과)
+  - 양쪽 패널 `overflow-y-auto` 스크롤 정상 동작 (`flex flex-1 overflow-hidden` 구조)
+- `InputPanel.tsx`: 버튼 영역 분리 (스크롤 밖에 고정), 초기화 버튼 이동
+- 초기화 버튼: 헤더 → 분석하기 옆으로 이동, 입력값+결과 동시 초기화, 항상 표시·비활성화 처리
 
 ---
 
