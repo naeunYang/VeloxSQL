@@ -63,7 +63,7 @@ export default function AnalyzePage() {
   }
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden bg-background">
+    <div className="flex h-[100dvh] min-h-0 flex-col overflow-hidden bg-background">
 
       {/* ── 헤더 ── */}
       <header className="shrink-0 border-b px-6 py-3">
@@ -117,13 +117,15 @@ export default function AnalyzePage() {
       </div>
 
       {/* ── 하단 2분할 (남은 높이 전체) ── */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex min-h-0 flex-1 overflow-hidden">
 
         {/* 왼쪽: 보조 입력 */}
-        <div className="w-[360px] shrink-0 overflow-y-auto border-r p-5 flex flex-col gap-3">
+        <div className="flex min-h-0 w-[360px] shrink-0 flex-col gap-3 overflow-hidden border-r p-5">
 
           {/* 실행 계획 */}
-          <div className="overflow-hidden rounded-lg border">
+          <div
+            className={`overflow-hidden rounded-lg border ${planOpen ? "flex min-h-0 flex-1 flex-col" : ""}`}
+          >
             <button
               type="button"
               onClick={() => setPlanOpen(!planOpen)}
@@ -138,7 +140,7 @@ export default function AnalyzePage() {
                 : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
             </button>
             {planOpen && (
-              <div className="border-t px-4 py-3">
+              <div className="flex min-h-0 flex-1 flex-col border-t px-4 py-3">
                 <p className="mb-2 text-xs text-muted-foreground">
                   MSSQL: SET SHOWPLAN_XML ON 또는 실제 실행 계획(XML) 붙여넣기
                 </p>
@@ -147,14 +149,16 @@ export default function AnalyzePage() {
                   onChange={(e) => setExecutionPlan(e.target.value)}
                   disabled={isLoading}
                   placeholder='<?xml version="1.0"?><ShowPlanXML ...>'
-                  className="h-44 resize-y font-mono text-xs"
+                  className="min-h-0 flex-1 resize-none font-mono text-xs"
                 />
               </div>
             )}
           </div>
 
           {/* 스키마 정보 */}
-          <div className="overflow-hidden rounded-lg border">
+          <div
+            className={`overflow-hidden rounded-lg border ${schemaOpen ? "flex min-h-0 flex-1 flex-col" : ""}`}
+          >
             <button
               type="button"
               onClick={() => setSchemaOpen(!schemaOpen)}
@@ -169,7 +173,7 @@ export default function AnalyzePage() {
                 : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
             </button>
             {schemaOpen && (
-              <div className="border-t px-4 py-3">
+              <div className="flex min-h-0 flex-1 flex-col border-t px-4 py-3">
                 <p className="mb-2 text-xs text-muted-foreground">
                   CREATE TABLE 문을 붙여넣으면 더 정밀한 분석이 가능합니다
                 </p>
@@ -191,7 +195,7 @@ export default function AnalyzePage() {
                   onChange={(e) => setSchema(e.target.value)}
                   disabled={isLoading}
                   placeholder={"CREATE TABLE Orders (\n  OrderID INT PRIMARY KEY,\n  ...\n);"}
-                  className="h-44 resize-y font-mono text-xs"
+                  className="min-h-0 flex-1 resize-none font-mono text-xs"
                 />
               </div>
             )}
@@ -200,7 +204,7 @@ export default function AnalyzePage() {
         </div>
 
         {/* 오른쪽: 분석 결과 */}
-        <div className="flex-1 overflow-y-auto p-5">
+        <div className="min-h-0 flex-1 overflow-y-auto p-5">
           {status === "idle" && (
             <div className="flex h-full items-center justify-center rounded-xl border border-dashed text-sm text-muted-foreground">
               SQL을 입력하고 분석하기를 눌러주세요
