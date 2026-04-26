@@ -57,7 +57,10 @@ export function ResultPanel({ result, originalSql }: ResultPanelProps) {
           </TabsContent>
 
           <TabsContent value="tuned">
-            <TunedQueryView originalSql={originalSql} tunedSql={result.tuned_sql} />
+            <TunedQueryView
+              originalSql={originalSql}
+              tunedSql={result.tuned_sql}
+            />
           </TabsContent>
         </Tabs>
       </CardContent>

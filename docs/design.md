@@ -5,7 +5,7 @@
 SQL 자동 튜닝 AI 웹 서비스. 개발자가 SQL + 실행계획 + 선택적 스키마를 입력하면 느린 원인을 분석하고 튜닝된 쿼리를 제안한다.
 
 - MVP 대상 DB: MSSQL
-- 기술 스택: Next.js (TypeScript) + FastAPI (Python) + Groq API
+- 기술 스택: Next.js (TypeScript) + shadcn/ui + FastAPI (Python) + Groq API
 
 ---
 
@@ -21,11 +21,11 @@ VeloxSQL/
 │   │   │   ├── globals.css
 │   │   │   └── analyze/page.tsx
 │   │   ├── components/
-│   │   │   ├── input/
-│   │   │   │   ├── InputPanel.tsx       # 세 입력창 + 제출 버튼 조합
-│   │   │   │   ├── QueryInput.tsx
-│   │   │   │   ├── PlanInput.tsx
-│   │   │   │   └── SchemaInput.tsx      # 테이블 감지 후 안내 포함, 접을 수 있음
+│   │   │   ├── analyze/
+│   │   │   │   ├── AnalyzeHeader.tsx
+│   │   │   │   ├── SqlEditorPanel.tsx   # SQL 입력 + 실행 버튼
+│   │   │   │   ├── AuxInputPanel.tsx    # 실행계획/스키마 보조 입력
+│   │   │   │   └── AnalysisResultArea.tsx
 │   │   │   ├── results/
 │   │   │   │   ├── ResultPanel.tsx      # 탭 컨테이너
 │   │   │   │   ├── QueryExplanation.tsx
@@ -42,6 +42,8 @@ VeloxSQL/
 │   │   ├── hooks/
 │   │   │   ├── useAnalysis.ts           # 폼 상태 + API 호출 + 결과 상태 통합
 │   │   │   └── useDetectedTables.ts     # SQL에서 테이블명 클라이언트 파싱
+│   │   ├── data/
+│   │   │   └── sampleData.ts            # 분석 화면 샘플 SQL/실행계획/스키마
 │   │   ├── lib/
 │   │   │   ├── api.ts                   # 타입 있는 fetch 래퍼 + camelCase 변환
 │   │   │   └── diff.ts                  # 원본/튜닝 SQL diff 유틸
@@ -259,7 +261,7 @@ httpx
 
 **frontend/package.json**
 ```
-next@15, react@19, typescript@5, tailwindcss@3, diff@5
+next@15, react@19, typescript@5, tailwindcss@3, shadcn/ui, diff@5
 ```
 
 > Monaco/CodeMirror 없음 — MVP는 textarea + highlight.js

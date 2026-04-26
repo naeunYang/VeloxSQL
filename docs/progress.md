@@ -61,11 +61,11 @@ shadcn/ui 기반으로 전체 구현. Button / Textarea / Label / Badge / Card /
 - `src/components/common/LoadingSpinner.tsx` — 스피너 + 메시지
 - `src/components/common/ErrorBanner.tsx` — shadcn Alert 기반
 
-#### 6-2 입력 컴포넌트
-- `src/components/input/QueryInput.tsx` — Label + Textarea
-- `src/components/input/PlanInput.tsx` — Label + Textarea
-- `src/components/input/SchemaInput.tsx` — 접기/펼치기 + 감지된 테이블 안내 (Alert)
-- `src/components/input/InputPanel.tsx` — Card 안에 세 입력 + Button
+#### 6-2 분석 화면 컴포넌트
+- `src/components/analyze/AnalyzeHeader.tsx` — 분석 화면 헤더
+- `src/components/analyze/SqlEditorPanel.tsx` — SQL 입력, 샘플 로딩, 분석/초기화 액션
+- `src/components/analyze/AuxInputPanel.tsx` — 실행계획/스키마 보조 입력
+- `src/components/analyze/AnalysisResultArea.tsx` — 상태별 결과 영역
 
 #### 6-3 결과 컴포넌트
 - `src/components/results/QueryExplanation.tsx`
@@ -86,6 +86,7 @@ shadcn/ui 기반으로 전체 구현. Button / Textarea / Label / Badge / Card /
 - `frontend/components.json` — shadcn 설정 파일 (자동 생성)
 - `frontend/src/types/css.d.ts` — CSS 모듈 타입 선언
 - `frontend/src/lib/utils.ts` — shadcn cn() 유틸 (자동 생성)
+- `frontend/src/data/sampleData.ts` — 분석 화면 샘플 SQL/실행계획/스키마
 - `frontend/src/components/ui/` — shadcn UI 컴포넌트 (자동 생성)
 
 #### UI 개선 (이전 세션)
@@ -110,6 +111,16 @@ shadcn/ui 기반으로 전체 구현. Button / Textarea / Label / Badge / Card /
   - 양쪽 패널 `overflow-y-auto` 스크롤 정상 동작 (`flex flex-1 overflow-hidden` 구조)
 - `InputPanel.tsx`: 버튼 영역 분리 (스크롤 밖에 고정), 초기화 버튼 이동
 - 초기화 버튼: 헤더 → 분석하기 옆으로 이동, 입력값+결과 동시 초기화, 항상 표시·비활성화 처리
+
+#### UI 개선 (종료 전 정리)
+- `docs/design.md`: 기술 스택에 shadcn/ui 명시, 최신 프론트 폴더 구조 반영
+- `frontend/src/components/input/*`: 더 이상 사용하지 않는 입력 컴포넌트 제거
+- `frontend/src/data/sampleData.ts`: 샘플 데이터를 컴포넌트에서 분리
+- `frontend/src/components/analyze/*`: `/analyze` 페이지 UI를 헤더, SQL 입력, 보조 입력, 결과 영역으로 분리
+- `frontend/src/components/ui/accordion.tsx`: shadcn Accordion 추가
+- `AuxInputPanel.tsx`: 실행계획/스키마 접기 UI를 shadcn Accordion 기반으로 변경
+- `SqlEditorPanel.tsx`: 분석 성공 후 SQL 입력 영역 compact 모드 지원, 접기/펼치기는 아이콘 버튼으로 표시
+- `analyze/page.tsx`: 렌더 중 상태 갱신을 `useEffect`로 이동하고 페이지는 상태 조율 중심으로 정리
 
 ---
 

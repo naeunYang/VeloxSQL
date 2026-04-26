@@ -43,11 +43,11 @@ No frontend test runner is currently configured. For frontend changes, run `npm 
 
 ## Commit Guidelines
 
-Recent commits use short Conventional Commit-style prefixes, usually `feat:` plus a concise Korean or English summary:
+Recent commits use short Conventional Commit-style prefixes. Keep the type in English and write the summary in Korean:
 
 ```text
-feat: add missing index recommendation rule
-fix: handle empty execution plans
+feat: 저장소 작업 가이드 추가
+fix: 빈 실행 계획 처리
 ```
 
 ## Security & Configuration Tips
